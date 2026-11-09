@@ -1,0 +1,30 @@
+Problem 1 — Find the Promos
+
+What this is
+A command-line script that reads timestamped episode screenplays and writes a ranked list of promo clips. Each promo is one continuous 20–60 second stretch from a single episode. The script does not edit video.
+
+What you need
+Python 3.10 or newer.
+The episode .txt files (the input pack). They are not stored in this folder.
+The script uses only the Python standard library.
+For the Gemini pass, set GEMINI_API_KEY. A Gemini chat subscription is not an API key.
+Get a key from Google AI Studio. The free tier allows 20 requests a day for each model.
+
+Run
+From this folder:
+
+python find_promos.py --input "PATH_TO_SHOW_FOLDER" --output "..\raw_outputs"
+
+PATH_TO_SHOW_FOLDER can be the show folder itself, or a folder that contains exactly one show folder.
+Use --judge heuristic to skip Gemini.
+Use --judge gemini to have Gemini rewrite the hook, the cliffhanger, and the reason, and reject weak clips. The default model is gemini-3.6-flash. Pass --model if you need a different one.
+Use --limit 3 to try three episodes first.
+
+Outputs, written into the folder you pass to --output
+series_ranking.md    readable posting order
+series_ranking.json  the same list, with transcripts
+quality_notes.json   clips the tool itself does not trust
+episodes\            one unedited JSON file per episode
+
+The top 10 in series_ranking.md are marked post_first. The rest are reserve.
+Start and end times are copied from the screenplay. They are not frame cuts.

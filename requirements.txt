@@ -1,0 +1,2 @@
+# No third-party packages. The script uses the Python standard library,
+# including the Gemini call.
